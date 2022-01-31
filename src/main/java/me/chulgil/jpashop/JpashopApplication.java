@@ -16,7 +16,7 @@ public class JpashopApplication {
 		System.out.println("==================");
 
 		SpringApplication app = new SpringApplication(JpashopApplication.class);
-		app.setWebApplicationType(WebApplicationType.NONE);
+		app.setWebApplicationType(WebApplicationType.SERVLET);
 		app.run(args);
 
 	}
