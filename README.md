@@ -1,7 +1,7 @@
-## 스프링 부트와 JPA을 활용한 쇼핑몰 웹앱 개발
+# 스프링 부트와 JPA을 활용한 쇼핑몰 웹앱 개발
 
 ---
-### 0. 프로젝트 환경설정
+## 1. 프로젝트 환경설정
 
  > [스프링 부트 스타터](https://start.spring.io/)로 프로젝트 생성
   - 자바 버젼 : 11
@@ -32,3 +32,9 @@
    - mockito: 목 라이브러리
    - assertj: 테스트 코드를 좀 더 편하게 작성하게 도와주는 라이브러리
    - spring-test: 스프링 통합 테스트 지원
+---
+
+> SQL실행 파라미터를 로그로 남기기
+* 다음 [외부 라이브러리](https://github.com/gavlyukovskiy/spring-boot-data-source-decorator) 추가
+ - `implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.0'`
+ - 주의 : 운영 환경에서는 성능 이슈가 있을 수 있기 때문에 제외한다.
