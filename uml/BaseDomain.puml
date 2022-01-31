@@ -1,0 +1,31 @@
+
+@startuml
+skinparam rectangle {
+    roundCorner<<Concept>> 25
+}
+
+rectangle " 기본 도메인 모델 " <<Concept>> {
+
+    rectangle "회원"
+    rectangle "주문"
+    rectangle "주문상품"
+    rectangle "상품"
+    rectangle "도서"
+    rectangle "음반"
+    rectangle "영화"
+    rectangle "카테고리"
+    rectangle "배송"
+
+    회원 "1" -- "*" 주문
+    주문 "1" - "*" 주문상품
+    주문 "1" -- "1" 배송
+    주문상품 "*" - "1" 상품
+    카테고리 "*" -- "*" 상품
+
+    상품 <<-- 음반
+    상품 <<-- 영화
+    상품 <<-- 도서
+
+}
+
+@enduml

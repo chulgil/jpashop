@@ -32,9 +32,31 @@
    - mockito: 목 라이브러리
    - assertj: 테스트 코드를 좀 더 편하게 작성하게 도와주는 라이브러리
    - spring-test: 스프링 통합 테스트 지원
----
 
 > SQL실행 파라미터를 로그로 남기기
 * 다음 [외부 라이브러리](https://github.com/gavlyukovskiy/spring-boot-data-source-decorator) 추가
  - `implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.0'`
  - 주의 : 운영 환경에서는 성능 이슈가 있을 수 있기 때문에 제외한다.
+
+---
+
+## 2. 도메인 분석 설계
+
+### 2.1 요구사항 분석
+
+>  기능목록
+
+ - 회원 기능 : 등록, 조회
+ - 상품 기능 : 등록, 조회, 수정
+ - 주문 기능 : 상품 주문, 주문 조회, 주문 취소
+ - 요구 사항 :
+   - 상품은 재고 관리가 필요
+   - 상품을 카테고리로 구분 (도서, 음반, 영화) 
+   - 상품 주문시 배송정보 입력
+ 
+### 2.2 도메인 모델
+
+![기본 도메인](uml/BaseDomain.png)
+![상세 도메인](uml/DetailDomain.png)
+![테이블 설계](uml/ERD.png)
+

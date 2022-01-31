@@ -1,0 +1,88 @@
+@startuml
+skinparam rectangle {
+    roundCorner<<Concept>> 25
+}
+
+rectangle " 상세 도메인 모델 " <<Concept>> {
+
+    class Member {
+      id: Long
+      name: String
+      **address: Address**
+      orders: List
+    }
+
+    class Order {
+      id: Long
+      **member: Member**
+      **orderItems: List**
+      **delivery: Delivery**
+      orderDate: Date
+      status: OrderStatus
+    }
+
+    class OrderItem {
+      id: Long
+      **order: Order**
+      ** item: Item**
+      orderPrice: int
+      count: int
+    }
+
+    class Catetgory {
+      id: Long
+      name: string
+      items: List
+      parent: Catetgory
+      child: List
+    }
+
+    class Item {
+      id: Long
+      name: String
+      price: int
+      stockQuantity: int
+      categories: List
+    }
+
+    Entity Album {
+      artist
+      etc
+    }
+
+    Entity Book {
+      author
+      isbn
+    }
+
+    Entity Movie {
+      director
+      actor
+    }
+
+
+    class Delivery {
+      id: Long
+      order: Order
+      **address : Address**
+      status: DeliveryStatus
+    }
+
+    Entity **Address** <<Value Type>> {
+      city: String
+      street: String
+      zipcode: String
+    }
+
+}
+
+Member "1" -- "*" Order
+Order "1" -- "1" Delivery
+Order "1" - "*" OrderItem
+OrderItem "*" -> "1" Item
+Catetgory "*" -- "*" Item
+Item <-- Album
+Item <-- Book
+Item <-- Movie
+
+@enduml

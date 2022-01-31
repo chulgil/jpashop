@@ -1,0 +1,81 @@
+@startuml
+
+skinparam rectangle {
+    roundCorner<<Concept>> 25
+}
+
+rectangle " 테이블 설계 " <<Concept>> {
+
+    ENTITY MEMBER {
+        * MEMBER_ID : <<generated>>
+        --
+        NAME
+        CITY
+        STREET
+        ZIPCODE
+    }
+
+    ENTITY ORDERS {
+        * ORDER_ID : <<generated>>
+        --
+        * MEMBER_ID <<FK>>
+        * DELIVERY_ID <<FK>>
+        ORDERDATE
+        STATUS
+    }
+
+    ENTITY DELIVERY {
+        * DELIVERY_ID : <<generated>>
+        --
+        CITY
+        STREET
+        ZIPCODE
+        STATUS
+    }
+
+    ENTITY ORDER_ITEM {
+        * ORDER_ITEM_ID : <<generated>>
+        --
+        * ORDER_ID <<FK>>
+        * ITEM_ID <<FK>>
+        ORDERPRICE
+        COUNT
+    }
+
+    ENTITY ITEM {
+        * ITEM_ID : <<generated>>
+        --
+        NAME
+        PRICE
+        STOCKQUANTITY
+        **DTYPE**
+        ARTIST
+        ETC
+        AUTHOR
+        ISBN
+        DIRECTOR
+        ACTOR
+    }
+
+    ENTITY CATEGORY {
+        * CATEGORY_ID : <<generated>>
+        --
+        * PARENT_ID (FK)
+        NAME
+    }
+
+    ENTITY CATEGORY_ITEM {
+        * CATEGORY_ID <<FK>>
+        * ITEM_ID <<FK>>
+        --
+    }
+}
+
+MEMBER ||--o{ ORDERS
+ORDERS ||..|| DELIVERY
+ORDERS ||.|{ ORDER_ITEM
+ORDER_ITEM }o.|| ITEM
+ITEM ||..o{ CATEGORY_ITEM
+CATEGORY_ITEM }o.|| CATEGORY
+
+@enduml
