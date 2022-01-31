@@ -55,8 +55,11 @@
    - 상품 주문시 배송정보 입력
  
 ### 2.2 도메인 모델
-
+---
 ![기본 도메인](uml/BaseDomain.png)
+---
 ![상세 도메인](uml/DetailDomain.png)
+---
 ![테이블 설계](uml/ERD.png)
+---
 
