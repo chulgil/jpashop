@@ -15,8 +15,19 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class MemberService {
 
-    @Autowired
+
     private MemberRepository memberRepository;
+
+    /**
+     * 세터인젝션 리파지토리 추가
+     * 장점 : 테스트 코드 작성시 Mock주입 가능
+     * 단점 : 런타임 시점에 변경 가능성이 있다.
+     * @param memberRepository
+     */
+    @Autowired
+    public void setMemberRepository(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     /**
      * 회원가입
