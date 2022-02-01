@@ -15,17 +15,16 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class MemberService {
 
-
-    private MemberRepository memberRepository;
+    // final 선언시 생성자 값 체크를 컴파일 시점에 가능 하다.
+    private final MemberRepository memberRepository;
 
     /**
-     * 세터인젝션 리파지토리 추가
-     * 장점 : 테스트 코드 작성시 Mock주입 가능
-     * 단점 : 런타임 시점에 변경 가능성이 있다.
+     * 생성자 인젝션
+     * 장점 : 생성시 완성으로 중간에 변경이 불가능 하고 테스트 케이스시 Mock주입 가능
      * @param memberRepository
      */
     @Autowired
-    public void setMemberRepository(MemberRepository memberRepository) {
+    public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
 
