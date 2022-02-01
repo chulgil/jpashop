@@ -13,10 +13,10 @@ import java.util.List;
  * @author cglee
  */
 @Repository
+@RequiredArgsConstructor
 public class MemberRepository {
 
-    @Autowired // 스프링부트JPA가 자동으로 해줌
-    private EntityManager em;
+    private final EntityManager em;
 
     public void save(Member member) {
         em.persist(member);
