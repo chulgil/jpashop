@@ -1,6 +1,7 @@
 package me.chulgil.jpashop.service;
 
 import me.chulgil.jpashop.domain.*;
+import me.chulgil.jpashop.exception.NotEnoughStockException;
 import me.chulgil.jpashop.repository.OrderRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +14,10 @@ import javax.persistence.EntityManager;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author cglee
+ * 통합 테스트 : 주문 서비스
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
@@ -25,16 +30,8 @@ public class OrderServiceTest {
     @Test
     public void 상품주문() throws Exception {
         //given
-        Member member = new Member();
-        member.setName("회원1");
-        member.setAddress(new Address("서울","강변로", "123-123"));
-        em.persist(member);
-
-        Book book = new Book();
-        book.setName("JPA상점");
-        book.setPrice(1000);
-        book.setStockQuantity(10);
-        em.persist(book);
+        Member member = createMember();
+        Book book = createBook("JPA상점", 1000, 10);
 
         int orderCount = 2;
 
@@ -50,24 +47,51 @@ public class OrderServiceTest {
         assertEquals("주문한 수량만큼 재고가 줄어야 한다.", 8, book.getStockQuantity());
 
     }
-    
+
+
     @Test
     public void 주문수량() throws Exception {
+
         //given
-        
+
         //when
-        
+
         //then
     }
-    
-    @Test
+
+    @Test(expected = NotEnoughStockException.class)
     public void 상품주문_재고수량초과() throws Exception {
         //given
-        
+        Member member = createMember();
+        Item item = createBook("JPA상점", 1000, 10);
+
+        int orderCount = 11;
+
         //when
-        
+        Long order = orderService.order(member.getId(), item.getId(), orderCount);
+
         //then
+        fail("재고 수량 부족 예외가 발생해야 한다.");
     }
-    
+
+
+    private Member createMember() {
+        Member member = new Member();
+        member.setName("회원1");
+        member.setAddress(new Address("서울","강변로", "123-123"));
+        em.persist(member);
+        return member;
+    }
+
+    private Book createBook(String name, int price, int quantity) {
+        Book book = new Book();
+        book.setName(name);
+        book.setPrice(price);
+        book.setStockQuantity(quantity);
+        em.persist(book);
+        return book;
+    }
+
+
     
 }
