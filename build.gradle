@@ -42,3 +42,6 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+// QueryDSL 추가
+apply from: 'gradle/querydsl.gradle'
