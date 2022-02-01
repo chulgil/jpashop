@@ -107,7 +107,7 @@
 > 주문,상품 엔티티 개발
 
 - 보통 서비스계층에서 대부분의 비지니스 로직을 처리하는 [트랜잭션 스크립트 패턴](http://martinfowler.com/eaaCatalog/domainModel.html) 을 사용하지 않고
-- 비지니스 로직이 대부분 엔티티에 있는 [도메일 모델 패턴](http://martinfowler.com/eaaCatalog/transactionScript.html) 을 사용하여
+- 비지니스 로직이 대부분 엔티티에 있는 [도메인 모델 패턴](http://martinfowler.com/eaaCatalog/transactionScript.html) 을 사용하여
 - 서비스 계층은 단순히 엔티티에 필요한 요청을 위임하는 형식으로 작성한다.
  
   - 주문생성 : 회원ID, 상품ID, 주문수량을 받아서 엔티티 생성
