@@ -5,8 +5,11 @@ import me.chulgil.jpashop.domain.*;
 import me.chulgil.jpashop.repository.ItemRepository;
 import me.chulgil.jpashop.repository.MemberRepository;
 import me.chulgil.jpashop.repository.OrderRepository;
+import me.chulgil.jpashop.repository.OrderSearch;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -60,5 +63,8 @@ public class OrderService {
         order.cancel();
      }
 
+     public List<Order> findOrders(OrderSearch orderSearch) {
+         return orderRepository.findAll(orderSearch);
+     }
 
 }
