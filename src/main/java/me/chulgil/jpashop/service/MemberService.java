@@ -1,10 +1,8 @@
 package me.chulgil.jpashop.service;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import me.chulgil.jpashop.domain.Member;
 import me.chulgil.jpashop.repository.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
