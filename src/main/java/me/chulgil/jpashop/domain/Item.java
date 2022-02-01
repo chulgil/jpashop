@@ -36,7 +36,7 @@ public abstract class Item {
     }
 
     @SneakyThrows
-    public void deleteStock(int quantity) {
+    public void removeStock(int quantity) {
         this.stockQuantity -= quantity;
         if (this.stockQuantity < 0) {
             this.stockQuantity = 0;

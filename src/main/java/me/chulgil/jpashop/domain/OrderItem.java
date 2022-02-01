@@ -5,6 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ * @author cglee
+ */
 @Entity
 @Getter @Setter
 public class OrderItem {
@@ -23,4 +26,29 @@ public class OrderItem {
 
     private int orderPrice;
     private int count;
+
+    public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setOrderPrice(orderPrice);
+        orderItem.setCount(count);
+
+        item.removeStock(count);
+        return orderItem;
+    }
+
+    /**
+     * 주문취소 : 재고수량 복구
+     */
+    public void cancel() {
+        getItem().addStock(count);
+    }
+
+    /**
+     * 주문상품 총 가격
+     * @return 주문가격 * 수량
+     */
+    public int getTotalPrice() {
+        return getOrderPrice() + getCount();
+    }
 }
