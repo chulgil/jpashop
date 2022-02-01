@@ -3,6 +3,7 @@ package me.chulgil.jpashop.service;
 import me.chulgil.jpashop.domain.*;
 import me.chulgil.jpashop.exception.NotEnoughStockException;
 import me.chulgil.jpashop.repository.OrderRepository;
+import me.chulgil.jpashop.repository.OrderSearch;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -79,6 +82,27 @@ public class OrderServiceTest {
 
         //then
         fail("재고 수량 부족 예외가 발생해야 한다.");
+    }
+
+    @Test
+    public void 주문검색() throws Exception {
+        //given
+        Member member = createMember();
+        Item item = createBook("JPA상점", 1000, 10);
+        Item item2 = createBook("JPA상점", 1000, 10);
+
+        Long orderId1 = orderService.order(member.getId(), item.getId(), 1);
+        Long orderId2 = orderService.order(member.getId(), item2.getId(), 1);
+        orderService.cancelOrder(orderId2);
+
+        //when
+        OrderSearch search = new OrderSearch();
+        search.setMemberName("회원1");
+        search.setOrderStatus(OrderStatus.ORDER);
+        List<Order> orders = orderService.findOrders(search);
+
+        //then
+        assertEquals("주문검색 결과가 2건", 1, orders.size());
     }
 
 
