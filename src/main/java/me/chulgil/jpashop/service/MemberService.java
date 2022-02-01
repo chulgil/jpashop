@@ -1,5 +1,6 @@
 package me.chulgil.jpashop.service;
 
+import lombok.AllArgsConstructor;
 import me.chulgil.jpashop.domain.Member;
 import me.chulgil.jpashop.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,20 +14,12 @@ import java.util.List;
  */
 @Service
 @Transactional(readOnly = true)
+// 모든 필드를 가지고 생성자 인젝션을 자동으로 주입
+@AllArgsConstructor
 public class MemberService {
 
     // final 선언시 생성자 값 체크를 컴파일 시점에 가능 하다.
     private final MemberRepository memberRepository;
-
-    /**
-     * 생성자 인젝션
-     * 장점 : 생성시 완성으로 중간에 변경이 불가능 하고 테스트 케이스시 Mock주입 가능
-     * @param memberRepository
-     */
-    @Autowired
-    public MemberService(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
 
     /**
      * 회원가입
