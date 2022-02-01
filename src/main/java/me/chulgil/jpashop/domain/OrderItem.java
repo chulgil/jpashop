@@ -52,6 +52,6 @@ public class OrderItem {
      * @return 주문가격 * 수량
      */
     public int getTotalPrice() {
-        return getOrderPrice() + getCount();
+        return getOrderPrice() * getCount();
     }
 }
