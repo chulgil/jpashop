@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Service
 @Transactional(readOnly = true)
-@RequiredArgsConstructor // final 만 생성자로 생성
+@RequiredArgsConstructor
 public class MemberService {
 
     private final MemberRepository memberRepository;
