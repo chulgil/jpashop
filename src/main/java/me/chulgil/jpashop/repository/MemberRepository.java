@@ -1,6 +1,8 @@
 package me.chulgil.jpashop.repository;
 
+import lombok.RequiredArgsConstructor;
 import me.chulgil.jpashop.domain.Member;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -13,7 +15,7 @@ import java.util.List;
 @Repository
 public class MemberRepository {
 
-    @PersistenceContext
+    @Autowired // 스프링부트JPA가 자동으로 해줌
     private EntityManager em;
 
     public void save(Member member) {
